@@ -19,6 +19,7 @@ parser.add_argument("--load_model", type=str, default='demo.tar')
 opt = parser.parse_args()
 demo_processor = Demo(opt)
 
+
 @app.route("/abstract", methods=['POST'])
 def abstract():
     """

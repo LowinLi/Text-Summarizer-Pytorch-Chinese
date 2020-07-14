@@ -1,14 +1,12 @@
 import os
 import shutil
 import collections
-import tqdm
+from tqdm import tqdm
 from tensorflow.core.example import example_pb2
 import struct
 import random
 import re
 import jieba
-from tqdm import tqdm
-import pandas as pd
 
 
 finished_path = "data/finished"
@@ -127,7 +125,7 @@ def preprocess(x):
     x = str(x).replace('\r', '').replace('\n',
                                          '').replace('\t',
                                                      '').replace(' ', '')
-    regex = re.compile("[()，+-.、。；！：《》（）:——“”？_【】\/]")
+    regex = re.compile(r"[()，+-.、。；！：《》（）:——“”？_【】\/]")
     x = regex.sub('', x)
     mytext = jieba.cut(x, cut_all=False)
     return ' '.join(mytext)

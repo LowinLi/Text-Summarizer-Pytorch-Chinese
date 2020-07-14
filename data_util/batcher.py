@@ -178,8 +178,7 @@ class Batcher(object):
         self.batch_size = batch_size
         # Initialize a queue of Batches waiting to be used, and a queue of Examples waiting to be batched
         self._batch_queue = Queue.Queue(self.BATCH_QUEUE_MAX)
-        self._example_queue = Queue.Queue(self.BATCH_QUEUE_MAX *
-                                          self.batch_size)
+        self._example_queue = Queue.Queue(self.BATCH_QUEUE_MAX * self.batch_size)
 
         # Different settings depending on whether we're in single_pass mode or not
         if single_pass:
@@ -230,8 +229,8 @@ class Batcher(object):
 
         while True:
             try:
-                (article, abstract) = next(input_gen) # read the next example from file. article and abstract are both strings.
-            except StopIteration: # if there are no more examples:
+                (article, abstract) = next(input_gen)  # read the next example from file. article and abstract are both strings.
+            except StopIteration:  # if there are no more examples:
                 #logger.info("The example generator for this example queue filling thread has exhausted data.")
                 if self._single_pass:
                     #logger.info("single_pass mode is on, so we've finished reading dataset. This thread is stopping.")
@@ -242,8 +241,8 @@ class Batcher(object):
 
             # abstract_sentences = [sent.strip() for sent in data.abstract2sents(abstract)] # Use the <s> and </s> tags in abstract to get a list of sentences.
             abstract_sentences = [abstract.strip()]
-            example = Example(article, abstract_sentences, self._vocab) # Process into an Example.
-            self._example_queue.put(example) # place the Example in the example queue.
+            example = Example(article, abstract_sentences, self._vocab)  # Process into an Example.
+            self._example_queue.put(example)  # place the Example in the example queue.
 
     def fill_batch_queue(self):
         while True:

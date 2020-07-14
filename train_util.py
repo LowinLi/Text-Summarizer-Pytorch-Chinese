@@ -34,7 +34,8 @@ def get_enc_data(batch):
         extra_zeros = T.zeros(batch_size, batch.max_art_oovs)
         extra_zeros = get_cuda(extra_zeros)
 
-    return enc_batch, enc_lens, enc_padding_mask, enc_batch_extend_vocab, extra_zeros, ct_e
+    return enc_batch, enc_lens, enc_padding_mask, \
+        enc_batch_extend_vocab, extra_zeros, ct_e
 
 
 def get_dec_data(batch):

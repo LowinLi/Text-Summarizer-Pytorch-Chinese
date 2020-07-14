@@ -1,21 +1,19 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
 import time
 from data_util.log import logger
 import torch as T
-import torch.nn as nn
-import torch.nn.functional as F
+import rouge
 from model import Model
 
 from data_util import config, data
 from data_util.batcher import Batcher, Example, Batch
 from data_util.data import Vocab
-from train_util import *
-from beam_search import *
+from beam_search import beam_search, get_enc_data
 from rouge import Rouge
 import argparse
 import jieba
-from data_util.log import logger
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
 def get_cuda(tensor):
@@ -173,4 +171,6 @@ if __name__ == "__main__":
     else:
         demo_processor = Demo(opt)
         logger.info(
-            demo_processor.abstract('就在对接货币基金的互联网理财产品诞生一周年的时候余额宝们的收益率破5已悄然成常态而数据显示今年截至6月6日市场上654只债券基金AB类份额分开计算平均收益率达451%且有248只债基产品收益率超过5%占比38%'))
+            demo_processor.abstract(
+                '就在对接货币基金的互联网理财产品诞生一周年的时候余额宝们的收益率破5已悄然成常态而数据显示今年截至6月6日市场上654只债券基金AB类份额分开计算平均收益率达451%且有248只债基产品收益率超过5%占比38%'
+            ))

@@ -1,5 +1,6 @@
-#Most of this file is copied form https://github.com/abisee/pointer-generator/blob/master/data.py
-
+'''
+Most of this file is copied form https://github.com/abisee/pointer-generator/blob/master/data.py
+'''
 import glob
 import random
 import struct
@@ -75,7 +76,7 @@ class Vocab(object):
         with open(fpath, "w") as f:
             fieldnames = ['word']
             writer = csv.DictWriter(f, delimiter="\t", fieldnames=fieldnames)
-            for i in xrange(self.size()):
+            for i in range(self.size()):
                 writer.writerow({"word": self._id_to_word[i]})
 
 
@@ -93,7 +94,8 @@ def example_generator(data_path, single_pass):
             reader = open(f, 'rb')
             while True:
                 len_bytes = reader.read(8)
-                if not len_bytes: break  # finished reading this file
+                if not len_bytes:
+                    break  # finished reading this file
                 str_len = struct.unpack('q', len_bytes)[0]
                 example_str = struct.unpack('%ds' % str_len,
                                             reader.read(str_len))[0]
@@ -146,11 +148,13 @@ def outputids2words(id_list, vocab, article_oovs):
         try:
             w = vocab.id2word(i)  # might be [UNK]
         except ValueError as e:  # w is OOV
+            print(str(e))
             assert article_oovs is not None, "Error: model produced a word ID that isn't in the vocabulary. This should not happen in baseline (no pointer-generator) mode"
             article_oov_idx = i - vocab.size()
             try:
                 w = article_oovs[article_oov_idx]
             except ValueError as e:  # i doesn't correspond to an article oov
+                print(str(e))
                 raise ValueError(
                     'Error: model produced word ID %i which corresponds to article OOV %i but this example only has %i article OOVs'
                     % (i, article_oov_idx, len(article_oovs)))
@@ -168,6 +172,7 @@ def abstract2sents(abstract):
             cur = end_p + len(SENTENCE_END)
             sents.append(abstract[start_p + len(SENTENCE_START):end_p])
         except ValueError as e:  # no more sentences
+            print(str(e))
             return sents
 
 

@@ -160,11 +160,9 @@ class Train(object):
             mask_t = get_cuda(T.zeros(
                 len(enc_out)))  #Padding mask of batch for current time step
             mask_t[
-                mask ==
-                1] = 1  #If [STOP] is not encountered till previous time step, mask_t = 1 else mask_t = 0
+                mask == 1] = 1  #If [STOP] is not encountered till previous time step, mask_t = 1 else mask_t = 0
             mask[
-                (mask == 1) + (x_t == self.end_id) ==
-                2] = 0  #If [STOP] is not encountered till previous time step and current word is [STOP], make mask = 0
+                (mask == 1) + (x_t == self.end_id) == 2] = 0  #If [STOP] is not encountered till previous time step and current word is [STOP], make mask = 0
             decoder_padding_mask.append(mask_t)
             is_oov = (x_t >= config.vocab_size
                       ).long()  #Mask indicating whether sampled word is OOV
@@ -291,10 +289,8 @@ class Train(object):
 
     # ------------------------------------------------------------------------------------
         self.trainer.zero_grad()
-        (self.opt.mle_weight * mle_loss +
-         self.opt.rl_weight * rl_loss).backward()
+        (self.opt.mle_weight * mle_loss + self.opt.rl_weight * rl_loss).backward()
         self.trainer.step()
-
         return mle_loss.item(), batch_reward
 
     def trainIters(self):
@@ -317,8 +313,7 @@ class Train(object):
             if iter % 50 == 0:
                 mle_avg = mle_total / count
                 r_avg = r_total / count
-                logger.info("iter:" + str(iter) + "  mle_loss:" +
-                            "%.3f" % mle_avg + "  reward:" + "%.4f" % r_avg)
+                logger.info("iter:" + str(iter) + "  mle_loss:" + "%.3f" % mle_avg + "  reward:" + "%.4f" % r_avg)
                 count = mle_total = r_total = 0
 
             if iter % 5000 == 0:

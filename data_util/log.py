@@ -13,7 +13,7 @@ logger.setLevel(logging.DEBUG)
 root = os.path.dirname(__file__)
 if 'logs' not in os.listdir(root):
     os.mkdir(root + '/logs/')
-    logger.info('日志目录:'+root + '/logs/')
+    logger.info('日志目录:' + root + '/logs/')
 name = root + "/logs/%s.log" % datetime.now().strftime('%Y%m%d')
 
 handler = logging.FileHandler(name)

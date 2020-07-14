@@ -8,3 +8,4 @@ __pycache__
 logs
 *.log
 *demo.tar
+vocab

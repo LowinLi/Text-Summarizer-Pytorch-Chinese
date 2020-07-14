@@ -4,7 +4,7 @@
 ## 初衷
 由于工作需要，在开源社区寻找汉语生成摘要模型时，几乎找不到可用的开源项目。
 
-本项目在英文生成式摘要开源项目[Text-Summarizer-Pytorch](https://github.com/rohithreddy024/Text-Summarizer-Pytorch)基础上，结合jieba分词，在数据集[LCSTS](http://icrc.hitsz.edu.cn/Article/show/139.html)上跑通一遍训练流程，中间自然踩过了很多坑，完整代码在这里开源出来供大家参考。
+本项目在英文生成式摘要开源项目[Text-Summarizer-Pytorch](https://github.com/rohithreddy024/Text-Summarizer-Pytorch)基础上（指针生成网络），结合jieba分词，在数据集[LCSTS](http://icrc.hitsz.edu.cn/Article/show/139.html)上跑通一遍训练流程，中间自然踩过了很多坑，完整代码在这里开源出来供大家参考。
 
 这里包括下载已经训练好的模型，部署服务，也包括借鉴代码完整跑一边训练流程，做为baseline使用。
 ## 效果

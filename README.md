@@ -1,21 +1,27 @@
 # Text-Summarizer-Pytorch-Chinese
 + 提供一款中文版生成式摘要服务。
-+ 提供从数据到训练到部署，完整流程baseline。
++ 提供从数据到训练到部署，完整流程参考。
 ## 初衷
-由于工作需要，在开源社区寻找汉语生成摘要模型，然而几乎找不到可用的开源项目。
+由于工作需要，在开源社区寻找汉语生成摘要模型时，几乎找不到可用的开源项目。
 
-基于英文生成摘要开源项目[Text-Summarizer-Pytorch](https://github.com/rohithreddy024/Text-Summarizer-Pytorch)，改造成中文摘要模型，并在数据集[LCSTS](http://icrc.hitsz.edu.cn/Article/show/139.html)上进行训练，得到模型测试集指标：
+本项目在英文生成式摘要开源项目[Text-Summarizer-Pytorch](https://github.com/rohithreddy024/Text-Summarizer-Pytorch)基础上，结合jieba分词，在数据集[LCSTS](http://icrc.hitsz.edu.cn/Article/show/139.html)上跑通一遍训练流程，中间自然踩过了很多坑，完整代码在这里开源出来供大家参考。
+
+这里包括下载已经训练好的模型，部署服务，也包括借鉴代码完整跑一边训练流程，做为baseline使用。
+## 效果
+测试集指标：
 |  集合   | 验证集  | 测试集
 |  ----  | ----  |----  |
 | ROUGE-1  | 0.3553 |0.3396 |
 | ROUGE-2  | 0.1843 |0.1668 |
 | ROUGE-L  | 0.3481 |0.3320 |
-该模型没有经过细致优化，只是完整跑了一遍流程，如果您感兴趣可以直接下载部署，便于您快速建立生成式摘要baseline。
+该模型没有经过细致优化，只是完整跑了一遍流程，仅供参考。
+[case请移步readme最下方](#摘要效果示例)
+
 ## 搭建服务
 
-+ 模型：
-  链接: https://pan.baidu.com/s/1NKMIAsaE8H7GiCpP7Jovig 提取码: d7pr
-+ 字典：
++ 已训练好模型：
+链接: https://pan.baidu.com/s/1NKMIAsaE8H7GiCpP7Jovig 提取码: d7pr
++ 对应字典：
 链接: https://pan.baidu.com/s/1A3vzYYYenu7vfNQgRX9NHA 提取码: 8ti6
 
 把下载的两份文件放在根目录下。
@@ -31,7 +37,7 @@ curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -
 
 ## 训练模型
 
-### 下载PreLCSTS数据集
+#### 下载PreLCSTS数据集
 链接: https://pan.baidu.com/s/172CvApckpZu602hr6nwgAA 提取码: wb3s
 1. 下载好的文件夹放在根目录下
 2. 预处理数据
@@ -57,7 +63,7 @@ sh test.sh
 ```
 
 ## 训练中间过程
-+ 训练时损失函数降低
+#### 训练时损失函数降低
 ```
 2020-07-04 12:58:38,434 - data_util.log - INFO - Bucket queue size: 0, Input queue size: 0
 2020-07-04 12:59:38,499 - data_util.log - INFO - Bucket queue size: 1000, Input queue size: 65600
@@ -101,7 +107,7 @@ sh test.sh
 2020-07-06 09:30:01,782 - data_util.log - INFO - Bucket queue size: 1000, Input queue size: 300000
 2020-07-06 09:30:29,142 - data_util.log - INFO - iter:207300  mle_loss:2.662  reward:0.0000
 ```
-+ 第一步验证集验证（0200000.tar模型最佳）
+#### 第一步验证集验证（0200000.tar模型最佳）
 ```
 2020-07-13 14:12:15,025 - data_util.log - INFO - 0005000.tar rouge_1:0.2338 rouge_2:0.0837 rouge_l:0.2338
 2020-07-13 14:12:15,060 - data_util.log - INFO - 
@@ -185,7 +191,7 @@ sh test.sh
 2020-07-13 14:16:41,883 - data_util.log - INFO - 
 2020-07-13 14:16:48,698 - data_util.log - INFO - 0205000.tar rouge_1:0.3442 rouge_2:0.1815 rouge_l:0.3393
 ```
-+ 选择0200000.tar再次训练
+#### 选择0200000.tar再次训练
 ```
 2020-07-13 14:31:09,581 - data_util.log - INFO - iter:200050  mle_loss:2.367  reward:0.3033
 2020-07-13 14:31:36,368 - data_util.log - INFO - Bucket queue size: 1000, Input queue size: 10000
@@ -240,7 +246,7 @@ sh test.sh
 2020-07-13 17:17:45,511 - data_util.log - INFO - Bucket queue size: 1000, Input queue size: 10000
 ```
 
-+ 第二次用验证集验证
+#### 第二次用验证集验证
 ```
 2020-07-13 17:19:01,530 - data_util.log - INFO - 0200000.tar rouge_1:0.3553 rouge_2:0.1843 rouge_l:0.3481
 2020-07-13 17:19:01,564 - data_util.log - INFO - 
@@ -251,12 +257,12 @@ sh test.sh
 2020-07-13 17:19:22,869 - data_util.log - INFO - 0215000.tar rouge_1:0.3486 rouge_2:0.1842 rouge_l:0.3467
 ```
 
-+ 测试
+#### 测试
 ```
 2020-07-13 17:20:01,738 - data_util.log - INFO - 0200000.tar rouge_1:0.3396 rouge_2:0.1668 rouge_l:0.3320
 ```
 
-+ 摘要效果示例
+#### 摘要效果示例
 article:文本；ref：参考摘要；dec：模型摘要
 ```
 article: 用于 众筹 的 是 一套 100 平方米 市场价 约 为 90 万 的 三室 住房 只要 投资 1000 元 以上 就 可以 成为 投资者 筹到 54 万元 总额 截止 相当于 总价 的 6 折 成交 金额 超出 54 万 的 部分 将 作为 投资收益 分给 未能 拍 得 房屋 的 其他人

@@ -1,0 +1,17 @@
+version: '3.4'
+services:
+  web-1:
+    build: .
+    image: abstract
+    expose:
+      - "5000"
+    ports:
+      - 5000:5000
+    container_name: abstract_01
+    volumes:
+      - "./data_util/logs:/logs"
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 3G

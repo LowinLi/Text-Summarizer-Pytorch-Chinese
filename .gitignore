@@ -1,0 +1,10 @@
+*.bin
+*.xlsx
+data_process
+PreLCSTS
+data
+__pycache__
+.vscode
+logs
+*.log
+*demo.tar

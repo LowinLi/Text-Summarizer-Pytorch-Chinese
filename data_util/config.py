@@ -2,6 +2,8 @@ train_data_path = "data/chunked/train/train_*"
 valid_data_path = "data/chunked/valid/valid_*"
 test_data_path = "data/chunked/test/test_*"
 vocab_path = "data/vocab"
+demo_vocab_path = ""
+demo_vocab_size = 40000
 
 # Hyperparameters
 hidden_dim = 512

@@ -108,7 +108,7 @@ class Evaluate(object):
 
 class Demo(Evaluate):
     def __init__(self, opt):
-        self.vocab = Vocab(config.vocab_path, config.vocab_size)
+        self.vocab = Vocab(config.demo_vocab_path, config.demo_vocab_size)
         self.opt = opt
         self.setup_valid()
 

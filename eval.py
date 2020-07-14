@@ -1,19 +1,19 @@
 import os
-
 import time
 from data_util.log import logger
 import torch as T
 import rouge
 from model import Model
-
 from data_util import config, data
 from data_util.batcher import Batcher, Example, Batch
 from data_util.data import Vocab
-from beam_search import beam_search, get_enc_data
+from beam_search import beam_search
+from train_util import get_enc_data
 from rouge import Rouge
 import argparse
 import jieba
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+if config.cuda:
+    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 
 def get_cuda(tensor):
@@ -36,9 +36,11 @@ class Evaluate(object):
     def setup_valid(self):
         self.model = Model()
         self.model = get_cuda(self.model)
-
-        checkpoint = T.load(
+        if config.cuda:
+            checkpoint = T.load(
             os.path.join(config.demo_model_path, self.opt.load_model))
+        else:
+            checkpoint = T.load(os.path.join(config.demo_model_path, self.opt.load_model), map_location='cpu')
         self.model.load_state_dict(checkpoint["model_dict"])
 
     def print_original_predicted(self, decoded_sents, ref_sents, article_sents,

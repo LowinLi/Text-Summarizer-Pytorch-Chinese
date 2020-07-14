@@ -2,7 +2,7 @@ train_data_path = "data/chunked/train/train_*"
 valid_data_path = "data/chunked/valid/valid_*"
 test_data_path = "data/chunked/test/test_*"
 vocab_path = "data/vocab"
-demo_vocab_path = ""
+demo_vocab_path = "vocab"
 demo_vocab_size = 40000
 
 # Hyperparameters
@@ -27,3 +27,5 @@ demo_model_path = ""
 
 intra_encoder = True
 intra_decoder = True
+
+cuda = False

@@ -5,7 +5,6 @@ PreLCSTS
 data
 __pycache__
 .vscode
-logs
 *.log
 *demo.tar
 vocab

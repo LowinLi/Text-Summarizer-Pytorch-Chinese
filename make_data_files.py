@@ -7,6 +7,7 @@ import struct
 import random
 import re
 import jieba
+import pandas as pd
 
 
 finished_path = "data/finished"
@@ -132,18 +133,18 @@ def preprocess(x):
 
 
 if __name__ == "__main__":
-    #for file in ['eval', 'test', 'train']:
-    #    df = pd.read_csv('./PreLCSTS/%s.csv' % file, header=None)
-    #    if file == 'eval':
-    #        file = 'valid'
-    #    with open('./data/unfinished/%s.title.txt' % file, 'w') as f:
-    #        for data in tqdm(df[0].tolist()):
-    #            f.write(preprocess(data))
-    #            f.write('\n')
-    #    with open('./data/unfinished/%s.article.txt' % file, 'w') as f:
-    #        for data in tqdm(df[1].tolist()):
-    #            f.write(preprocess(data))
-    #            f.write('\n')
+    for file in ['eval', 'test', 'train']:
+        df = pd.read_csv('./PreLCSTS/%s.csv' % file, header=None)
+        if file == 'eval':
+            file = 'valid'
+        with open('./data/unfinished/%s.title.txt' % file, 'w') as f:
+            for data in tqdm(df[0].tolist()):
+                f.write(preprocess(data))
+                f.write('\n')
+        with open('./data/unfinished/%s.article.txt' % file, 'w') as f:
+            for data in tqdm(df[1].tolist()):
+                f.write(preprocess(data))
+                f.write('\n')
     shuffle_text_data("train.article.txt", "train.title.txt",
                       "train.art.shuf.txt", "train.abs.shuf.txt")
     shuffle_text_data("valid.article.txt", "valid.title.txt",

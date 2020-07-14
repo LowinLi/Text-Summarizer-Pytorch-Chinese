@@ -37,8 +37,7 @@ class Evaluate(object):
         self.model = Model()
         self.model = get_cuda(self.model)
         if config.cuda:
-            checkpoint = T.load(
-            os.path.join(config.demo_model_path, self.opt.load_model))
+            checkpoint = T.load(os.path.join(config.demo_model_path, self.opt.load_model))
         else:
             checkpoint = T.load(os.path.join(config.demo_model_path, self.opt.load_model), map_location='cpu')
         self.model.load_state_dict(checkpoint["model_dict"])

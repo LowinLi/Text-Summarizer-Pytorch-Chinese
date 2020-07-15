@@ -1,4 +1,5 @@
 # Text-Summarizer-Pytorch-Chinese
+![Python application](https://github.com/LowinLi/Text-Summarizer-Pytorch-Chinese/workflows/Python%20application/badge.svg)
 + 提供一款中文版生成式摘要服务。
 + 提供从数据到训练到部署，完整流程参考。
 ## 初衷

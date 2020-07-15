@@ -1,0 +1,4 @@
+jieba==0.42.1
+tqdm==4.46.0
+pandas==1.0.3
+rouge

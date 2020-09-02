@@ -40,7 +40,7 @@ curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -
 ## 训练模型
 
 #### 下载PreLCSTS数据集
-链接: https://pan.baidu.com/s/172CvApckpZu602hr6nwgAA 提取码: wb3s
+链接: https://pan.baidu.com/s/12fTxxMhRcSHCSv_EcFXyHQ  密码: 39gn
 1. 下载好的文件夹放在根目录下
 2. 预处理数据
 ```bash

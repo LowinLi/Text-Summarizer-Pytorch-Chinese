@@ -2,7 +2,8 @@
 *.xlsx
 data_process
 PreLCSTS
-data
+*.csv
+*.txt
 __pycache__
 .vscode
 *.log

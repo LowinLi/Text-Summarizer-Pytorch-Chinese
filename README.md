@@ -23,6 +23,7 @@
 
 + 已训练好模型：
 链接: https://pan.baidu.com/s/1NKMIAsaE8H7GiCpP7Jovig 提取码: d7pr
+  + demo.tar不必解压
 + 对应字典：
 链接: https://pan.baidu.com/s/1A3vzYYYenu7vfNQgRX9NHA 提取码: 8ti6
 

@@ -3,5 +3,5 @@ tensorflow==2.2.1
 flask==1.0.2
 Flask-Cors==3.0.9
 jieba==0.42.1
-numpy==1.18.4
+numpy==1.22.0
 rouge

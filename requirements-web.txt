@@ -5,3 +5,4 @@ Flask-Cors==3.0.9
 jieba==0.42.1
 numpy==1.18.4
 rouge
+werkzeug>=3.1.4 # not directly required, pinned by Snyk to avoid a vulnerability
